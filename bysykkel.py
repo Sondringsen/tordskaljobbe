@@ -23,7 +23,7 @@ def available_bikes() -> Dict[str, int]:
     
 
 
-def nearest_station(position: Tuple[int, int], type: int) -> str:
+def nearest_station(position: Tuple[int, int], type: int, lang: str) -> str:
     # type 0 indicates that you are looking for a bike
     # type 1 indicates that you are on a bike looking for a dock
 
@@ -43,8 +43,12 @@ def nearest_station(position: Tuple[int, int], type: int) -> str:
             min_distance = distance
             nearest_station = station['name']
             available_units = possible_stations[station['station_id']]
-    return_sentence = 'The nearest station is ' + nearest_station + ' and there is ' + str(available_units)
-    return_sentence += ' bikes.' if type == 0 else ' docks.'
+    if lang == "en":
+        return_sentence =  'The nearest station is ' + nearest_station + ' and there is ' + str(available_units)
+        return_sentence += ' bikes.' if type == 0 else ' docks.'
+    else:
+        return_sentence =  'Den nærmeste stasjonen er ' + nearest_station + ' og det er ' + str(available_units)
+        return_sentence += ' ledige sykler.' if type == 0 else ' ledige dokker.'
     return return_sentence
 
 
