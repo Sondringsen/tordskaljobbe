@@ -1,5 +1,10 @@
 from bysykkel import nearest_station
+import sys
 
-position = (59.925383335451734, 10.769398408466573)
-near = nearest_station(position=position, type=1)
+lat = sys.argv[0]
+lon = sys.argv[1]
+type = sys.argv[2]
+
+position = (lat, lon)
+near = nearest_station(position=position, type=type)
 print(near)
