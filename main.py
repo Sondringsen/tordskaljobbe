@@ -8,5 +8,5 @@ lang = sys.argv[4]
 
 position = (float(lat), float(lon))
 
-near = nearest_station(position=position, type=type, lang = lang)
+near = nearest_station(position=position, type=int(type), lang=lang)
 print(near)

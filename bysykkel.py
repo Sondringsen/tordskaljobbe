@@ -51,5 +51,6 @@ def nearest_station(position: Tuple[int, int], type: int, lang: str) -> str:
         return_sentence += ' ledige sykler.' if type == 0 else ' ledige dokker.'
     return return_sentence
 
-
-
+# position = (59.92299614519953, 10.708443152360262)
+# near = nearest_station(position=position, type='0', lang= 'nb')
+# print(near)
