@@ -32,6 +32,7 @@ def nearest_station(position: Tuple[int, int], type: int) -> str:
     system_response = requests.get("https://gbfs.urbansharing.com/oslobysykkel.no/station_information.json", headers={"Client-Identifier": "student-reiseplanleggingsprosjekt"}).json()['data']['stations']
     min_distance = 100000000
     nearest_station = ''
+    available_units = 0
     for station in system_response:
         if station['station_id'] not in possible_stations.keys():
             continue
@@ -41,7 +42,10 @@ def nearest_station(position: Tuple[int, int], type: int) -> str:
         if distance <= min_distance:
             min_distance = distance
             nearest_station = station['name']
-    return nearest_station
+            available_units = possible_stations[station['station_id']]
+    return_sentence = 'The nearest station is ' + nearest_station + ' and there is ' + str(available_units)
+    return_sentence += ' bikes.' if type == 0 else ' docks.'
+    return return_sentence
 
 
-position = (59.924617, 10.741444)
+
