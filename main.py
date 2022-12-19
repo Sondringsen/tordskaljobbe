@@ -1,14 +1,9 @@
 from bysykkel import nearest_station
 import sys
 
-lat = sys.argv[0]
-lon = sys.argv[1]
-type = sys.argv[2]
-
-print(lat)
-print(lon)
-print(type)
-
+lat = sys.argv[1]
+lon = sys.argv[2]
+type = sys.argv[3]
 
 position = (float(lat), float(lon))
 
