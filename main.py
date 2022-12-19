@@ -6,11 +6,11 @@ lon = sys.argv[1]
 type = sys.argv[2]
 
 print(lat)
-# print(lon)
+print(lon)
 print(type)
-print(type(lat))
 
-position = (lat, lon)
+
+position = (float(lat), float(lon))
 
 near = nearest_station(position=position, type=type)
 print(near)
