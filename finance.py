@@ -10,7 +10,6 @@ def get_financials(ticker: str) -> str:
     }
 
     response = requests.request("GET", url, headers=headers).json()[0]
-    # response = requests.get(url)['quoteResponse']['result'][0]
     relevant_headers = ['shortName', 'marketCap', 'trailingPE', 'priceToBook', 'epsTrailingTwelveMonths']
     relevant_data = {}
     for header in relevant_headers:
@@ -25,9 +24,9 @@ def get_financials(ticker: str) -> str:
 
 
 
-# ticker = sys.argv[1]
+ticker = sys.argv[1]
 
-financial_summary = get_financials(ticker='tsla')
+financial_summary = get_financials(ticker)
 print(financial_summary)
 
 
