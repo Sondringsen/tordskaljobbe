@@ -18,17 +18,16 @@ def get_financials(ticker: str) -> str:
     
     return_string = "Financial summary of " + relevant_data['shortName'] + ' is: \n'
     data_strings = [(str(key) +  ': ' + str(relevant_data[key]) + '\n') for key in relevant_data.keys()]
-    return_string += ''.join(data_strings) + '.'
+    return_string += ''.join(data_strings)
 
-    print(return_string)
     return return_string
 
 
 
 
-ticker = sys.argv[1]
+# ticker = sys.argv[1]
 
-financial_summary = get_financials(ticker=ticker)
+financial_summary = get_financials(ticker='tsla')
 print(financial_summary)
 
 
