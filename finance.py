@@ -2,22 +2,14 @@ import requests
 import sys
 
 def get_financials(ticker: str) -> str:
-    # url = "https://yahoo-finance15.p.rapidapi.com/api/yahoo/qu/quote/%s" %ticker
 
-    # headers = {
-    #     "X-RapidAPI-Key": "4c595d1183msh8acc46aeea31ee7p1dc3b0jsn046b73034b60",
-    #     "X-RapidAPI-Host": "yahoo-finance15.p.rapidapi.com"
-    # }
-
-    # response = requests.request("GET", url, headers=headers).json()[0]
-    # relevant_headers = ['shortName', 'marketCap', 'trailingPE', 'priceToBook', 'epsTrailingTwelveMonths']
-    # string_headers = ['Company name', 'Market cap', 'PE (trailing)', 'PB', 'EPS (TTM)']
     url = "https://yahoo-finance15.p.rapidapi.com/api/yahoo/qu/quote/%s/financial-data" % ticker
 
     headers = {
         "X-RapidAPI-Key": "4c595d1183msh8acc46aeea31ee7p1dc3b0jsn046b73034b60",
         "X-RapidAPI-Host": "yahoo-finance15.p.rapidapi.com"
     }
+
 
     response = requests.request("GET", url, headers=headers).json()['financialData']
 
@@ -29,14 +21,19 @@ def get_financials(ticker: str) -> str:
                         'Revenue Growth', 'Gross MArgins', 'EBTIDA Margins', 'Operating Margins', 'Profit Margins']
     relevant_data = {}
     for header in relevant_headers:
-        # print(response[header])
-        if header == 'recommendationKey':
-            relevant_data[header] = response[header]
-        else:
-            relevant_data[header] = response[header]['fmt']
+        try:
+            if header == 'recommendationKey':
+                string_header_index = string_headers[relevant_headers.index(header)]
+                relevant_data[string_header_index] = response[header]
+            else:
+                string_header_index = string_headers[relevant_headers.index(header)]
+                relevant_data[string_header_index] = response[header]['fmt']  
+        except:
+            continue
+
     
     return_string = "Financial summary of " + ticker + ' is: \n'
-    data_strings = [(string_headers[i] +  ': ' + str(relevant_data[relevant_headers[i]]) + '\n') for i in range(len(relevant_headers))]
+    data_strings = [(str(key) +  ': ' + str(relevant_data[key]) + '\n') for key in relevant_data.keys()]
     return_string += ''.join(data_strings)
 
     return return_string
