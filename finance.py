@@ -44,9 +44,9 @@ def get_financials(ticker: str) -> str:
 
 
 
-# ticker = sys.argv[1]
+ticker = sys.argv[1]
 
-financial_summary = get_financials(ticker="aapl")
+financial_summary = get_financials(ticker)
 print(financial_summary)
 
 
