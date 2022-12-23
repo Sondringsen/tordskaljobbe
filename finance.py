@@ -12,7 +12,7 @@ def get_financials(ticker: str) -> str:
     # response = requests.request("GET", url, headers=headers).json()[0]
     # relevant_headers = ['shortName', 'marketCap', 'trailingPE', 'priceToBook', 'epsTrailingTwelveMonths']
     # string_headers = ['Company name', 'Market cap', 'PE (trailing)', 'PB', 'EPS (TTM)']
-    url = "https://yahoo-finance15.p.rapidapi.com/api/yahoo/qu/quote/AAPL/financial-data"
+    url = "https://yahoo-finance15.p.rapidapi.com/api/yahoo/qu/quote/%s/financial-data" % ticker
 
     headers = {
         "X-RapidAPI-Key": "4c595d1183msh8acc46aeea31ee7p1dc3b0jsn046b73034b60",
