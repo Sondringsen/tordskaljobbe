@@ -33,6 +33,7 @@ def nearest_station(position: Tuple[int, int], type: int, lang: str) -> str:
     min_distance = 100000000
     nearest_station = ''
     available_units = 0
+    coordinates_of_station = (0,0)
     for station in system_response:
         if station['station_id'] not in possible_stations.keys():
             continue
@@ -40,6 +41,7 @@ def nearest_station(position: Tuple[int, int], type: int, lang: str) -> str:
         long_diff = position[1]-station['lon']
         distance = sqrt(lat_diff**2+long_diff**2)
         if distance <= min_distance:
+            coordinates_of_station = (station['lat'], station['lon'])
             min_distance = distance
             nearest_station = station['name']
             available_units = possible_stations[station['station_id']]
@@ -49,7 +51,7 @@ def nearest_station(position: Tuple[int, int], type: int, lang: str) -> str:
     else:
         return_sentence =  'Den nærmeste stasjonen er ' + nearest_station + ' og det er ' + str(available_units)
         return_sentence += ' ledige sykler.' if type == 0 else ' ledige dokker.'
-    return return_sentence
+    return coordinates_of_station
 
 # position = (59.92299614519953, 10.708443152360262)
 # near = nearest_station(position=position, type='0', lang= 'nb')
